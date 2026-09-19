@@ -1,5 +1,6 @@
 const $=s=>document.querySelector(s);let balance=10000,mode='slots',busy=false,plays=0,best=0;const faces=['🐶','🦊','🐺','🐕','🐈','🐱','🐶','👨‍🚀','🎁'];
-const art=(i,cls='')=>`<span class="art ${cls}" data-art="${i}" style="background-position:${(i%3)*50}% ${Math.floor(i/3)*50}%" role="img" aria-label="${['Французский бульдог','Сиба-ину','Хаски','Ретривер','Серый кот','Белый кот','Бульдог в худи','Пёс-космонавт','Мистери-бокс'][i]}"></span>`;
+const photoFiles=['bulldog.png','shiba.jpg','husky.jpg','retriever.jpg','gray-cat.jpg','white-cat.jpg'];
+const art=(i,cls='')=>`<span class="art ${i<6?'photo photo-'+i:''} ${cls}" data-art="${i}" style="${i<6?`background-image:url('assets/${photoFiles[i]}')`:`background-position:${(i%3)*50}% ${Math.floor(i/3)*50}%`}" role="img" aria-label="${['Французский бульдог в очках','Сиба-ину','Хаски','Ретривер','Серый кот','Белый кот','Бульдог в худи','Пёс-космонавт','Мистери-бокс'][i]}"></span>`;
 const money=n=>new Intl.NumberFormat('ru-RU').format(n);const random=n=>{let a=new Uint32Array(1);let limit=Math.floor(4294967296/n)*n;do{crypto.getRandomValues(a)}while(a[0]>=limit);return a[0]%n};
 function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),3000)}
 function update(){ $('#balance').textContent=money(balance);if($('#plays'))$('#plays').textContent=plays;if($('#best'))$('#best').textContent=money(best);save()}
